@@ -1,0 +1,36 @@
+<!--<ion-navbar class="primary">Hola</ion-navbar>
+-->
+<ion-header [translucent]="true">
+  <ion-toolbar class="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title [translate]="'TITLE'"></ion-title>
+
+    <!--<ion-buttons slot="end">
+      <ion-item>
+        <ion-label position="floating" [translate]="'LANGUAGE'"></ion-label>
+        <ion-select [(ngModel)]="language" [value]="language" (ionChange)="changeLanguage()">
+          <ion-select-option value="ca">Català</ion-select-option>
+          <ion-select-option value="es">Castellano</ion-select-option>
+          <ion-select-option value="eu">Euskara</ion-select-option>
+          <ion-select-option value="gl">Galego</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-buttons>-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngFor="let animal of animals">
+      <button (click)="reproducir(animal)" color="light" value="pulsa para reproducir">
+        <span class="hidden" *ngIf="animal.playing">Pausar</span>
+        <span class="hidden" *ngIf="!animal.playing">Reproducir</span>
+        <img src="{{ animal.image }}" alt="#">
+        <h2>{{ animal.name }}</h2>
+      </button>
+    </ion-item>
+  </ion-list>
+</ion-content>

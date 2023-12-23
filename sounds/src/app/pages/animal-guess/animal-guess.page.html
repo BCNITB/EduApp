@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    
+    <ion-title [translate]="'TITLE02'"></ion-title>
+
+    <!--<ion-buttons slot="end">
+      <ion-item>
+        <ion-label position="floating" [translate]="'LANGUAGE'"></ion-label>
+        <ion-select [(ngModel)]="language" [value]="language" (ionChange)="changeLanguage()">
+          <ion-select-option value="ca">Català</ion-select-option>
+          <ion-select-option value="es">Castellano</ion-select-option>
+          <ion-select-option value="eu">Euskara</ion-select-option>
+          <ion-select-option value="gl">Galego</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-buttons>-->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content ngInit="start()">
+
+  <div class="btn-center">
+    <ion-button (click)="start()" id="play" *ngIf="!clue3" [translate]="'PLAYBTN'" color="tertiary"></ion-button>
+    <ion-button (click)="askClue1()" *ngIf="!clue3" [translate]="'SHOWCLUE'" color="tertiary"></ion-button>
+  </div>
+  
+  <div *ngIf="clue1 && !clue3" class="ion-padding">
+    <p>{{ animalPhrase }}</p>
+
+    <ion-button (click)="askClue2()" [translate]="'SHOWCLUE'" color="tertiary"></ion-button>
+    <div *ngIf="clue2">
+      <div id="img-content">
+        <img src="{{ animalImg }}" alt="{{ animalAlt }}">
+      </div>
+
+      <ion-button (click)="askClue3()" [translate]="'ANIMAL'" color="tertiary"></ion-button>
+    </div>
+  </div>
+
+  <form *ngIf="!clue3" class="ion-padding">
+    <ion-item>
+      <ion-label position="floating" [translate]="'LBL'"></ion-label>
+      <ion-input [formControl]="name" pattern="[a-zA-Z | *]" [(ngModel)]="animal"></ion-input>
+      
+      <ion-label color="danger" *ngIf="(name.errors?.['required'] && (name.touched || name.dirty) && !clue3)" [translate]="'MUST'"></ion-label>
+      <ion-label color="danger" *ngIf="name.errors?.['minlength'] && (name.touched || name.dirty)" [translate]="'CHARACT'"></ion-label>
+    </ion-item>
+
+    <div class="btn-center">
+      <ion-button type="submit" (click)="answer()" [translate]="'ANSERLBL'"></ion-button>
+      <ion-button type="reset" color="danger" [translate]="'ERASEBTN'"></ion-button>
+    </div>
+  </form>
+
+  <ion-card *ngIf="!clue3 && tries">
+    <p>{{ msg }}</p>
+    <p [translate]="'TRIES'" [translateParams]="{ value: counter }"></p>
+  </ion-card>
+
+  <ion-card *ngIf="clue3">
+    <h2 [translate]="'SOLUTION'"></h2>
+    <p [translate]="'POINTS'" [translateParams]="{ value: score }"></p>
+    <p>{{ msg }}: <b>{{ animalAlt }}</b></p>
+    <img id="imgSol" src="{{ animalImg }}" alt="{{ animalAlt }}">
+
+    <div class="btn-center">
+      <ion-button (click)="restart()"[translate]="'NEWGAME'"></ion-button>
+    </div>
+  </ion-card>
+
+</ion-content>
