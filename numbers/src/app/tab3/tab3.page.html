@@ -1,0 +1,69 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      ¡Multiplica!
+    </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+    <h2 ng-init="numAleatorio()">Calcula el producto de los siguientes números</h2>
+    <p class="numbers">Primer número: {{ num1 }}</p>
+    <p class="numbers">Segundo número {{ num2 }}</p>
+    <p *ngIf="count > 0" class="numbers">N<span class="hidden">úmero</span> intentos: {{ count }}</p>
+    
+    <form *ngIf="!check && count < 5">
+      <ion-item>
+        <ion-label position="floating" for="checklabel">Valor del producto</ion-label>
+        <ion-input autofocus="true" clearInput type="number" min="1" max="200" name="checklabel" [(ngModel)] = "num"></ion-input>
+      </ion-item>
+      <ion-button (click)="checkAnswer()">Comprueba</ion-button>
+    </form>
+
+    <div class="txt-center" *ngIf="check || count > 4">
+      <ion-button (click)="newGame()">Reiniciar</ion-button>
+    </div>
+  </div>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-header *ngIf="count < 5">
+        <ion-card-title>
+          {{ result }}
+        </ion-card-title>
+      </ion-card-header>
+
+      <div>
+        <div *ngIf="check">
+          <img src="../../assets/img/success.png" alt="¡Victoria!">
+        </div>
+  
+        <div *ngIf="fail && count < 5">
+          <img src="../../assets/img/fail.png" alt="¡Oh, no!">
+        </div>
+        
+        <div *ngIf="count > 4">
+          <img src="../../assets/img/loose.png" alt="¡Perdiste!">
+        </div>
+
+        <div *ngIf="check || (fail && count > 5)">
+          <p class="score">
+            Has necesitado: {{ count }} {{ word }}.
+          </p>
+          <p [ngClass]="{'good': count==1, 'bad': count>3}" class="message">
+            {{ msg }}
+          </p>
+        </div>
+      </div>
+    </ion-card-content>
+    
+    
+    
+    <!--<p><a href="https://giphy.com/gifs/minions-Ly6FB6xRSJlW8">via GIPHY</a></p>
+    <p>
+      <a href="https://giphy.com/gifs/excited-applause-minions-MOWPkhRAUbR7i">via GIPHY
+
+    </a>
+    </p>-->
+  </ion-card>
+</ion-content>
