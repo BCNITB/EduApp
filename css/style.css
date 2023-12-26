@@ -1,0 +1,39 @@
+.flex-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 5vw;
+
+}
+
+.container{
+    width: 30vw;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+a{
+    font-size: 2em;
+    font-weight: 500;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img{
+    width: 15vw;
+}
+
+#sounds-img{
+    background-image: url('../img/sound.png');
+}
+
+#numbers-img{
+    background-image: url('../img/umbers.png')
+}
