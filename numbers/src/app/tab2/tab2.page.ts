@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { LocalStorageService } from '../services/local-storage.service';
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -7,30 +9,86 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  num:number = 0;
-  num1:number = this.randomNum(0,100);
-  num2:number = this.randomNum(0,100);
-  sum:number = 0;
-  count:number = 0;
+  num: number;
+  num1: number;
+  num2: number;
+  sum: number;
+  count:number;
+  firstNum: number;
+  secondNum: number;
   
-  attempt: string = "intento";
-  attempts: string = "intentos";
-  result:string = "";
-  word:string = "";
-  msg:string = "";
+  option: string;
+  attempt: string;
+  attempts: string;
+  result:string;
+  word: string;
+  msg: string;
+  
+  resultArray: string[];
+  msgArray: string[];
+  
+  check: boolean;
+  fail: boolean;
+  
+  sound: any;
+  audioTime: any;  
 
-  resultArray:string[]=["Respuesta correcta", "¡Te has quedado corto!", "¡Te has pasado de largo!"];
-  msgArray:string[]=["¡Qué crack!", "¡Casi perfecto!", "Has de practicar más", "¡Esfuérzate más!", "Todo es mejorable"];
-  
-  check:boolean=false;
-  fail:boolean=false;
-  
-  sound:any;
-    
   audio=new Audio();
-  audioTime:any;
 
-  constructor() {}
+  constructor(private localStorageSrvc: LocalStorageService) {
+    this.option = String(this.retrieveFromLocalStorage('sumLevel'));
+    
+    this.firstNum = this.chooseLevel(1, this.option);
+    this.secondNum = this.chooseLevel(2, this.option);
+
+    this.num = 0;
+    this.num1 = this.randomNum(0,this.firstNum);
+    this.num2 = this.randomNum(0,this.secondNum);
+    this.sum = 0;
+    this.count = 0;
+  
+    this.attempt = "intento";
+    this.attempts = "intentos";
+    this.result = "";
+    this.word = "";
+    this.msg = "";
+
+    this.resultArray = ["Respuesta correcta", "¡Te has quedado corto!", "¡Te has pasado de largo!"];
+    this.msgArray = ["¡Qué crack!", "¡Casi perfecto!", "Has de practicar más", "¡Esfuérzate más!", "Todo es mejorable"];
+  
+    this.check = false;
+    this.fail = false;
+
+  }
+
+  chooseLevel(id: number, lvl: string){
+    if(id == 1){
+      switch(lvl){
+        case '1':
+        case '2':
+          return 10;
+          break;
+        case '3':
+          return 100;
+        default:
+          return 0;
+      }
+    }
+    else if(id == 2){
+      switch(lvl){
+        case '1':
+          return 10;
+          break;
+        case '2':
+        case '3':
+          return 100;
+        default:
+          return 0;
+      }
+    } else {
+      return 0;
+    }
+  }
 
   randomNum(a:any, b:any){
     return Math.round(Math.random() * (b - a) + parseInt(a, 10));
@@ -127,5 +185,10 @@ export class Tab2Page {
   
     this.check = false;
     this.fail = false;
+  }
+
+  retrieveFromLocalStorage(value: string) {
+    return this.localStorageSrvc.getItem(value);
+    console.log(value);
   }
 }

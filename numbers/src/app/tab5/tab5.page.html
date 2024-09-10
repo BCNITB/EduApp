@@ -1,0 +1,140 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Ajustes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Ajustes</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>Selecciona los niveles de juego</ion-card-header>
+    <ion-card-content>
+      <!--<form>
+        <ion-list>
+          <ion-item>
+            <ion-label for="sumLvl">Nivel para las Sumas</ion-label>
+            <ion-select
+              id="sumLvl"
+              name="sumLvl"
+              placeholder="Selecciona un nivel"
+              (ionChange)="sumSelect($event)"
+              (ionCancel)="handleCancel()"
+              (ionDismiss)="handleDismiss()"
+            >
+              <ion-select-option value="principiante">Principiante</ion-select-option>
+              <ion-select-option value="intermedio">Intermedio</ion-select-option>
+              <ion-select-option value="avanzado">Avanzado</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+
+        <ion-list>
+          <ion-item>
+            <ion-label for="prodLvl">Nivel para las Multiplicaciones</ion-label>
+            <ion-select
+              id="prodLvl"
+              name="prodLvl"
+              placeholder="Selecciona un nivel"
+              (ionChange)="prodSelect($event)"
+              (ionCancel)="handleCancel()"
+              (ionDismiss)="handleDismiss()"
+            >
+              <ion-select-option value="principiante">Principiante</ion-select-option>
+              <ion-select-option value="intermedio">Intermedio</ion-select-option>
+              <ion-select-option value="avanzado">Avanzado</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+
+        <ion-buttons >
+          <ion-button 
+          *ngIf="sumCheck == true && prodCheck == true" 
+          (click)="saveToLocalStorage()" 
+          id="save-btn">Guardar</ion-button>
+          <ion-button 
+          color="danger" 
+          (click)="Cancel()"
+          id="cancel-btn">Cancelar</ion-button>
+        </ion-buttons>
+      </form>-->
+
+      <form>
+        <div class="flex-container">
+          <div>
+            <ion-label position="floating" for="mathlabel">Selecciona un nivel para la suma:</ion-label>
+            <ion-list>
+              <ion-radio-group [compareWith]="compareWith" (ionChange)="handleChange(0, $event)" name="mathlabel">
+                <ion-item *ngFor="let level of levels; trackBy: trackItems">
+                  <ion-radio [value]="level">{{ level.level }}</ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+            <p *ngIf="checkSum == false">
+              No se ha seleccionado ningún nivel para la suma.
+            </p>
+
+            <ion-chip *ngIf="sumLvl != ''">{{ sumDescription }}</ion-chip>
+          </div>
+
+          <div>
+            <ion-label position="floating" for="prodlabel">Selecciona un nivel para el producto:</ion-label>
+            <ion-list>
+              <ion-radio-group [compareWith]="compareWith" (ionChange)="handleChange(1, $event)" name="prodlabel">
+                <ion-item *ngFor="let level of levels; trackBy: trackItems">
+                  <ion-radio [value]="level">{{ level.level }}</ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-list>
+            <p *ngIf="checkProd == false">
+              No se ha seleccionado ningún nivel para la multiplicación.
+            </p>
+
+            <ion-chip *ngIf="prodLvl != ''">{{ prodDescription }}</ion-chip>
+          </div>  
+        </div>
+
+        <ion-buttons>
+          <ion-button (click)="save()" id="save-btn" color="success">Guardar</ion-button>
+          <ion-button (click)="cancel()" id="cancel-btn" color="danger">Cancelar</ion-button>
+        </ion-buttons>
+      </form>
+    </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>Seleccionar el Idioma del juego</ion-card-header>
+  <ion-card-content>
+    
+  </ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>Seleccionar el Tamaño del texto</ion-card-header>
+  <ion-card-content></ion-card-content>
+</ion-card>
+
+<ion-card>
+  <ion-card-header>Seleccionar la combinación de colores</ion-card-header>
+  <ion-card-content></ion-card-content>
+</ion-card>
+
+<ion-toast 
+  [isOpen]="isAcceptOpen"
+  trigger="save-btn" 
+  message="Nuevos niveles guardados"
+  [duration]="5000"
+  (didDismis)="setOpen(false)"
+  ></ion-toast>
+<ion-toast
+[isOpen]="isCancelOpen"
+  trigger="cancel-btn"
+  message="Los nuevos niveles no se han guardados"
+  [duration]="5000"
+  (didDismis)="setOpen(false)"
+  ></ion-toast>
+</ion-content>
