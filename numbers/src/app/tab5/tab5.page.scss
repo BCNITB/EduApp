@@ -7,3 +7,17 @@
 .flex-container div{
     width: 30vw;
 }
+
+@media (max-width: 500px)  {
+    .flex-container{
+        flex-direction: column;
+    }
+
+    .flex-container div{
+        margin-left: 15vw;
+        width: 70vw;
+    }
+    /*.flex-container{
+        
+    }*/
+}
