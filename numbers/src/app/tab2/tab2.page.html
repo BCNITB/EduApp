@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      ¡Suma!
+      {{ "SUMSCRTITLE" | translate }}
     </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -9,21 +9,21 @@
 <ion-content [fullscreen]="true">
 
   <div class="ion-padding">
-    <h2 ng-init="numAleatorio()">Calcula la suma de los siguientes números</h2>
-    <p class="numbers">Primer número: {{ num1 }}</p>
-    <p class="numbers">Segundo número {{ num2 }}</p>
-    <p *ngIf="count > 0" class="numbers">N<span class="hidden">úmero</span> intentos: {{ count }}</p>
+    <h2 ng-init="numAleatorio()">{{ "SUMTITLE" | translate }}</h2>
+    <p class="numbers">{{ "SUMLBL1" | translate }} {{ num1 }}</p>
+    <p class="numbers">{{ "SUMLBL2" | translate }} {{ num2 }}</p>
+    <p *ngIf="count > 0" class="numbers">N<span class="hidden"></span> {{ "SUMTRIES" | translate }}{{ count }}</p>
     
     <form *ngIf="!check && count < 5">
       <ion-item>
-        <ion-label position="floating" for="checklabel">Valor de la suma</ion-label>
+        <ion-label position="floating" for="checklabel">{{ "SUMVALUE" | translate }}</ion-label>
         <ion-input autofocus="true" clearInput type="number" min="1" max="200" name="checklabel" [(ngModel)] = "num"></ion-input>
       </ion-item>
-      <ion-button (click)="checkAnswer()">Comprueba</ion-button>
+      <ion-button (click)="checkAnswer()">{{ "CHECKRESULT" | translate  }}</ion-button>
     </form>
 
     <div class="txt-center" *ngIf="check || count > 4">
-      <ion-button (click)="newGame()">Reiniciar</ion-button>
+      <ion-button (click)="newGame()">{{ "RESTART" | translate }}</ion-button>
     </div>
   </div>
   <ion-card>
@@ -49,7 +49,7 @@
 
         <div *ngIf="check || (fail && count > 5)">
           <p class="score">
-            Has necesitado: {{ count }} {{ word }}.
+            {{ "TRIESNUM" | translate }} {{ count }} {{ word }}.
           </p>
           <p [ngClass]="{'good': count==1, 'bad': count>3}" class="message">
             {{ msg }}
@@ -57,14 +57,5 @@
         </div>
       </div>
     </ion-card-content>
-    
-    
-    
-    <!--<p><a href="https://giphy.com/gifs/minions-Ly6FB6xRSJlW8">via GIPHY</a></p>
-    <p>
-      <a href="https://giphy.com/gifs/excited-applause-minions-MOWPkhRAUbR7i">via GIPHY
-
-    </a>
-    </p>-->
   </ion-card>
 </ion-content>

@@ -1,31 +1,38 @@
 <ion-tabs>
-
   <ion-tab-bar slot="bottom">
     <ion-tab-button tab="tab1" href="/tabs/tab1">
-      <ion-icon aria-hidden="true" name="help"></ion-icon>
-      <ion-label>Adivíname</ion-label>
+      <ion-icon aria-hidden="true" name="help" class="no-phones"></ion-icon>
+      <ion-label class="no-phones">{{ 'GUESS' | translate }}</ion-label>
+      <ion-icon aria-hidden="true" name="help" class="only-phones" aria-labelledby="guess-lbl"></ion-icon>
+      <ion-label class="only-phones hidden" id="guess-lbl" name="guess-lbl">{{ 'GUESS' | translate }}</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="tab2" href="/tabs/tab2">
-      <ion-icon aria-hidden="true" name="add"></ion-icon>
-      <ion-label>Súmame</ion-label>
+      <ion-icon aria-hidden="true" name="add" class="no-phones"></ion-icon>
+      <ion-label class="no-phones">{{ 'PLUS' | translate }}</ion-label>
+      <ion-icon aria-hidden="true" name="add" class="only-phones"></ion-icon>
+      <ion-label class="only-phones hidden">{{ 'PLUS' | translate }}</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="tab3" href="/tabs/tab3">
-      <ion-icon aria-hidden="true" name="close"></ion-icon>
-      <ion-label>Multiplícame</ion-label>
+      <ion-icon aria-hidden="true" name="close" class="no-phones"></ion-icon>
+      <ion-label class="no-phones">{{ 'MULTI' | translate }}</ion-label>
+      <ion-icon aria-hidden="true" name="close" class="only-phones"></ion-icon>
+      <ion-label class="only-phones hidden">{{ 'MULTI' | translate }}</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button tab="tab5" href="/tabs/tab5">
+      <ion-icon aria-hidden="true" name="settings" class="no-phones"></ion-icon>
+      <ion-label class="no-phones">{{ 'SETTINGS' | translate }}</ion-label>
+      <ion-icon aria-hidden="true" name="settings" class="only-phones"></ion-icon>
+      <ion-label class="only-phones hidden">{{ 'SETTINGS' | translate }}</ion-label>
     </ion-tab-button>
 
     <ion-tab-button tab="tab4" href="/tabs/tab4">
-      <ion-icon aria-hidden="true" name="book"></ion-icon>
-      <ion-label>Créditos</ion-label>
+      <ion-icon aria-hidden="true" name="book" class="no-phones"></ion-icon>
+      <ion-label class="no-phones">{{ 'CREDITS' | translate }}</ion-label>
+      <ion-icon aria-hidden="true" name="book" class="only-phones"></ion-icon>
+      <ion-label class="only-phones hidden">{{ 'CREDITS' | translate }}</ion-label>
     </ion-tab-button>
-    
-    <ion-tab-button tab="tab5" href="/tabs/tab5">
-      <ion-icon aria-hidden="true" name="settings"></ion-icon>
-      <ion-label>Ajustes</ion-label>
-    </ion-tab-button>
-    
   </ion-tab-bar>
-
 </ion-tabs>

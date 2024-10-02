@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 
 import { LocalStorageService } from '../services/local-storage.service';
+import { TranlateConfigService } from '../services/tranlate-config.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-tab2',
@@ -8,6 +10,8 @@ import { LocalStorageService } from '../services/local-storage.service';
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+
+  language: any;
 
   num: number;
   num1: number;
@@ -20,13 +24,34 @@ export class Tab2Page {
   option: string;
   attempt: string;
   attempts: string;
-  result:string;
+  attemptCat: string;
+  attemptsCat: string;
+  attemptEsp: string;
+  attemptsEsp: string;
+  attemptEus: string;
+  attemptsEus: string;
+  attemptGal: string;
+  attemptsGal: string;
+  result: string;
   word: string;
   msg: string;
   
   resultArray: string[];
   msgArray: string[];
-  
+  resultCatArray: string[];
+  msgCatArray: string[];
+  resultEspArray: string[];
+  msgEspArray: string[];
+  resultEusArray: string[];
+  msgEusArray: string[];
+  resultGalArray: string[];
+  msgGalArray: string[];
+  finalMsg: string[];
+  finalCatMsg: string[];
+  finalEspMsg: string[];
+  finalEusMsg: string[];
+  finalGalMsg: string[];
+
   check: boolean;
   fail: boolean;
   
@@ -35,8 +60,16 @@ export class Tab2Page {
 
   audio=new Audio();
 
-  constructor(private localStorageSrvc: LocalStorageService) {
-    this.option = String(this.retrieveFromLocalStorage('sumLevel'));
+  constructor(
+    private translateSrvc: TranslateService,
+    private translateConfSrvc: TranlateConfigService,
+    private localStorageSrvc: LocalStorageService
+  ) {
+
+    this.translateConfSrvc.getDefaultLanguage();
+    this.language = this.translateConfSrvc.getCurrentLang();
+
+    this.option = String(this.retrieveFromLocalStorage('sumLvl'));
     
     this.firstNum = this.chooseLevel(1, this.option);
     this.secondNum = this.chooseLevel(2, this.option);
@@ -47,28 +80,81 @@ export class Tab2Page {
     this.sum = 0;
     this.count = 0;
   
-    this.attempt = "intento";
-    this.attempts = "intentos";
+    this.attemptCat = "intent";
+    this.attemptsCat = "intents";
+    this.attemptEsp = "intento";
+    this.attemptsEsp = "intentos";
+    this.attemptEus = "intento";
+    this.attemptsEus = "intentos";
+    this.attemptGal = "intento";
+    this.attemptsGal = "intentos";
+    this.attempt = "";
+    this.attempts = "";
     this.result = "";
     this.word = "";
     this.msg = "";
 
-    this.resultArray = ["Respuesta correcta", "¡Te has quedado corto!", "¡Te has pasado de largo!"];
-    this.msgArray = ["¡Qué crack!", "¡Casi perfecto!", "Has de practicar más", "¡Esfuérzate más!", "Todo es mejorable"];
-  
+    this.resultCatArray = ["Resposta correcta", "T'has quedat curt!", "T'has pasat de llarg!"];
+    this.msgCatArray = ["Quin crack!", "Gairabé perfecte!", "Has de practicar més", "Esforçat més!", "Tot es millorable"];
+    this.finalCatMsg = ["Victòria!", "Oh, no!", "Has perdut!"];
+    this.resultEspArray = ["Respuesta correcta", "¡Te has quedado corto!", "¡Te has pasado de largo!"];
+    this.msgEspArray = ["¡Qué crack!", "¡Casi perfecto!", "Has de practicar más", "¡Esfuérzate más!", "Todo es mejorable"];
+    this.finalEspMsg = ["¡Victoria!", "¡Oh, no!", "¡Perdiste!"];
+    this.resultEusArray = ["Respuesta correcta", "¡Te has quedado corto!", "¡Te has pasado de largo!"];
+    this.msgEusArray = ["¡Qué crack!", "¡Casi perfecto!", "Has de practicar más", "¡Esfuérzate más!", "Todo es mejorable"];
+    this.finalEusMsg = ["¡Victoria!", "¡Oh, no!", "¡Perdiste!"];
+    this.resultGalArray = ["Respuesta correcta", "¡Te has quedado corto!", "¡Te has pasado de largo!"];
+    this.msgGalArray = ["¡Qué crack!", "¡Casi perfecto!", "Has de practicar más", "¡Esfuérzate más!", "Todo es mejorable"];
+    this.finalGalMsg = ["¡Victoria!", "¡Oh, no!", "¡Perdiste!"];
+    this.resultArray = [];
+    this.msgArray = [];
+    this.finalMsg = [];
+
+    switch(this.language){
+      case 'ca':
+        this.resultArray = this.resultCatArray;
+        this.msgArray = this.resultCatArray;
+        this.attempt = this.attemptCat;
+        this.attempts = this.attemptsCat;
+        break;
+      case 'es':
+        this.resultArray = this.resultEspArray;
+        this.msgArray = this.resultEspArray;
+        this.attempt = this.attemptEsp;
+        this.attempts = this.attemptsEsp;
+        break;
+      case 'eu':
+        this.resultArray = this.resultEusArray;
+        this.msgArray = this.resultEusArray;
+        this.attempt = this.attemptEus;
+        this.attempts = this.attemptsEus;
+        break;
+      case 'gl':
+        this.resultArray = this.resultGalArray;
+        this.msgArray = this.resultGalArray;
+        this.attempt = this.attemptGal;
+        this.attempts = this.attemptsGal;
+        break;
+      default:
+        this.resultArray = this.resultEspArray;
+        this.msgArray = this.resultEspArray;
+        this.attempt = this.attemptEsp;
+        this.attempts = this.attemptsEsp;
+        break;
+    }
+
     this.check = false;
     this.fail = false;
-
   }
 
   chooseLevel(id: number, lvl: string){
     if(id == 1){
       switch(lvl){
-        case '1':
-        case '2':
+        case 'principiante':
+        case 'intermedio':
           return 10;
           break;
-        case '3':
+        case 'avanzado':
           return 100;
         default:
           return 0;
@@ -76,11 +162,11 @@ export class Tab2Page {
     }
     else if(id == 2){
       switch(lvl){
-        case '1':
+        case 'principiante':
           return 10;
           break;
-        case '2':
-        case '3':
+        case 'intermedio':
+        case 'avanzado':
           return 100;
         default:
           return 0;
@@ -173,8 +259,10 @@ export class Tab2Page {
 
   newGame(){
     this.num = 0;
-    this.num1 = this.randomNum(0,100);
-    this.num2 = this.randomNum(0,100);
+    this.firstNum = this.chooseLevel(1, this.option);
+    this.secondNum = this.chooseLevel(2, this.option);
+    this.num1 = this.randomNum(0,this.firstNum);
+    this.num2 = this.randomNum(0,this.secondNum);
 
     this.sum = 0;
     this.count = 0;

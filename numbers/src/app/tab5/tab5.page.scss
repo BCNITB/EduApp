@@ -1,20 +1,21 @@
-.flex-container, ion-buttons{
+ion-buttons{
     display: flex;
     justify-content: center;
     gap: 5vw;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
-.flex-container div{
-    width: 30vw;
-}
+/*ion-button{
+    width: ;
+}*/
 
 @media (max-width: 500px)  {
     .flex-container{
         flex-direction: column;
     }
 
-    .flex-container div{
-        margin-left: 15vw;
+    ion-button{
         width: 70vw;
     }
     /*.flex-container{

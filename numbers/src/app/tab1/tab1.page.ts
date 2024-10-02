@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
 
+import { TranslateService } from '@ngx-translate/core';
+import { TranlateConfigService } from '../services/tranlate-config.service';
+
+import { LocalStorageService } from '../services/local-storage.service';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -7,32 +12,58 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  num:number;
-  num1:number;
+  language: any;
+
+  maxNum: number;
+  num: number;
+  num1: number;
   count:number;
   
+  option: string;
   attemptsS: string;
   attemptsP: string;
   result:string;
     
-  word:string;
-  msg:string;
+  word: string;
+  msg: string;
   
-  msgArray:string[];
-  resultArray:string[];
+  msgArray: string[];
+  resultArray: string[];
+  finalMsg: string[];
+  msgCatArray: string[];
+  resultCatArray: string[];
+  finalCatMsg: string[];
+  msgEspArray: string[];
+  resultEspArray: string[];
+  finalEspMsg: string[];
+  msgEusArray: string[];
+  resultEusArray: string[];
+  finalEusMsg: string[];
+  msgGalArray: string[];
+  resultGalArray: string[];
+  finalGalMsg: string[];
 
-
-  check:boolean;
-  fail:boolean;
+  check: boolean;
+  fail: boolean;
   
-  sound:any;
+  sound: any;
     
   audio=new Audio();
-  audioTime:any;
+  audioTime: any;
 
-  constructor() {
+  constructor(
+    private translateSrvc: TranslateService,
+    private translateConfSrvc: TranlateConfigService,
+    private localStorageSrvc: LocalStorageService
+  ) {
+    this.translateConfSrvc.getDefaultLanguage();
+    this.language = this.translateConfSrvc.getCurrentLang();
+
+    this.option = String(this.retrieveFromLocalStorage('guessLvl'));
+    this.maxNum = this.chooseLevel(this.option);
+
     this.num = 0;
-    this.num1 = this.randomNum(0,10);
+    this.num1 = this.randomNum(0,this.maxNum);
     this.count = 0;
   
     this.attemptsS = "intento";
@@ -41,11 +72,70 @@ export class Tab1Page {
     this.word = "";
     this.msg = "";
   
-    this.msgArray=["¡Qué crack!", "¡Casi perfecto!", "Has de practicar más", "¡Esfuérzate más!", "Todo es mejorable"];
-    this.resultArray=["Respuesta correcta", "¡Te has quedado corto!", "¡Te has pasado de largo!"];
+    this.msgCatArray = [];
+    this.resultCatArray =[];
+    this.finalCatMsg = [];
+    this.msgEspArray = ["¡Qué crack!", "¡Casi perfecto!", "Has de practicar más", "¡Esfuérzate más!", "Todo es mejorable"];
+    this.resultEspArray = ["Respuesta correcta", "¡Te has quedado corto!", "¡Te has pasado de largo!"];
+    this.finalEspMsg = ["¡Victoria!", "¡Oh, no!", "¡Perdiste!"];
+    this.msgEusArray = [];
+    this.resultEusArray =[];
+    this.finalEusMsg = [];
+    this.msgGalArray = [];
+    this.resultGalArray =[];
+    this.finalGalMsg = [];
+    this.msgArray = [];
+    this.resultArray = [];
+    this.finalMsg = [];
+
+    switch(this.language){
+      case 'ca':
+        this.msgArray = this.msgCatArray;
+        this.resultArray = this.resultCatArray;
+        this.finalMsg = this.finalCatMsg;
+        break;
+      case 'es':
+        this.msgArray = this.msgEspArray;
+        this.resultArray = this.resultEspArray;
+        this.finalMsg = this.finalEspMsg;
+        break;
+      case 'eu':
+        this.msgArray = this.msgEusArray;
+        this.resultArray = this.resultEusArray;
+        this.finalMsg = this.finalEusMsg;
+        break;
+      case 'gl':
+        this.msgArray = this.msgGalArray;
+        this.resultArray = this.resultGalArray;
+        this.finalMsg = this.finalGalMsg;
+        break;
+      default:
+        this.msgArray = this.msgEspArray;
+        this.resultArray = this.resultEspArray;
+        this.finalMsg = this.finalEspMsg;
+    }
 
     this.check = false;
     this.fail = false;
+  }
+
+  chooseLevel(lvl: string){
+    switch(lvl){
+      case 'principiante':
+        return 10;
+      case 'intermedio':
+        return 50;
+        break;
+      case 'avanzado':
+        return 100;
+      default:
+        return 0;
+    }
+  }
+
+  retrieveFromLocalStorage(value: string) {
+    return this.localStorageSrvc.getItem(value);
+    console.log(value);
   }
 
   randomNum(a: any, b: any){
@@ -127,7 +217,7 @@ export class Tab1Page {
     this.num = 0;
     this.count = 0;
 
-    this.num1 = this.randomNum(0,10);
+    this.num1 = this.randomNum(0,this.maxNum);
   
     this.result = "";
     this.word = "";

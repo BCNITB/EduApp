@@ -1,54 +1,42 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Créditos</ion-title>
-  
-  <!--<ion-buttons slot="end">
-    <ion-item>
-      <ion-label position="floating" [translate]="'LANGUAGE'"></ion-label>
-      <ion-select [(ngModel)]="language" [value]="language" (ionChange)="changeLanguage()">
-        <ion-select-option value="ca">Català</ion-select-option>
-        <ion-select-option value="es">Castellano</ion-select-option>
-        <ion-select-option value="eu">Euskara</ion-select-option>
-        <ion-select-option value="gl">Galego</ion-select-option>
-      </ion-select>
-    </ion-item>
-  </ion-buttons>-->
+    <ion-title>{{ "CREDITS" | translate }}</ion-title>
 </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Créditos</ion-title>
+      <ion-title size="large">{{ "CREDITS" | translate }}</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-card class="only-web">
     <p>
-      La aplicación para android e iOS. El cídugo compilado para Android puede descargarse del 
-      <a href="https://drive.google.com/file/d/1EbSaQb_nLaB5fiGrNbVsQxmG4lOYM0wH/view?usp=sharing" 
-      title="Descargar la aplicación en el dispositivo">
-        Google Drive
+      {{ "DRIVESENTENCE" | translate }} 
+      <a href="https://drive.google.com/file/d/1EbSaQb_nLaB5fiGrNbVsQxmG4lOYM0wH/view?usp=sharing">
+        <span class="only-scr">{{ "HIDDENDRIVESENTENCE" |translate }}</span> 
+        {{ "GOOGLEDRIVE" | translate }}
       </a>.
     </p>
     <p>
-      El código funete está disponible en el repositorio de Github del 
+      {{ "GITHUBSENTENCE" | translate }} 
       <a href="https://github.com/BCNITB/EduApp/tree/main/numbers" 
       target="_blank">
-        proyecto Numbers de EduApp
+        {{ "GITHUBLINK" | translate }} <span class="only-scr">{{ "GITHUBHIDDEN" | translate }}</span>
       </a>
     </p>
     <p>
-      Si se desea ver sólo el código fuente de Android. Se puede descargar desde la 
-      <a href="https://github.com/BCNITB/EduApp/tree/main/numbers/android" title="Código para Android (se abre en una nueva ventana)" target="_blank">
-        carpeta Android
+      {{ "ANDROIDSENTENCE" | translate }} 
+      <a href="https://github.com/BCNITB/EduApp/tree/main/numbers/android" target="_blank">
+        {{ "ANDROIDLINK" | translate }} <span class="only-scr">{{ "ANDOIRDHIDDEN" | translate }}</span>
       </a>
       .
     </p>
     <p>
-      Si se desea ver sólo el código fuente de iOS. Se puede descargar desde la 
-      <a href="https://github.com/BCNITB/EduApp/tree/main/numbers/ios" title="Código para iOS (se abre en una nueva ventana)" target="_blank">
-        carpeta Android
+      {{ "IOSSENTENCE" | translate }} 
+      <a href="https://github.com/BCNITB/EduApp/tree/main/numbers/ios" target="_blank">
+        {{ "IOSLINK" | translate }} <span class="only-scr">{{ "IOSHIDDEN" | translate }}</span>
       </a>
       .
     </p>
@@ -56,14 +44,16 @@
 
   <ion-card>
     <p>
-      <span class="black">Fuente de las imágenes</span>
-      <a href="http://cliparts.co" target="_blank" title="Se abre en una nueva página ClipArts">ClipArts</a>
+      <span class="black">{{ "FONSTITLE" | translate }}</span>
+      <a href="http://cliparts.co" target="_blank">
+        {{ "IMAGELINK" | translate }} <span class="only-scr">{{ "IMAGEHIDDEN" | translate }}</span>
+      </a>
     </p>
 
     <p>
-      <span class="black">Fuente de los sonidos</span>
-      <a href="http://www.sonidosmp3gratis.com" target="_blank" title="Se abre en una nueva página sonidos mp3 gratis">
-        Sonidos mp3 gratis
+      <span class="black">{{ "SOUNDSTUTLE" | translate }}</span>
+      <a href="http://www.sonidosmp3gratis.com" target="_blank">
+        {{ "SOUNDSLINK" | translate }} <span class="only-scr">{{ "SOUNDSHIDDEN" | translate }}</span>
       </a>
     </p>
   </ion-card>

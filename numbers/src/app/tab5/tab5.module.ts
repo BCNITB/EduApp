@@ -8,12 +8,15 @@ import { Tab5PageRoutingModule } from './tab5-routing.module';
 
 import { Tab5Page } from './tab5.page';
 
+import { TranslateModule } from '@ngx-translate/core';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    Tab5PageRoutingModule
+    Tab5PageRoutingModule,
+    TranslateModule
   ],
   declarations: [Tab5Page]
 })
