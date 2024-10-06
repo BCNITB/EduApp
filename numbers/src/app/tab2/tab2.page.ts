@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { LocalStorageService } from '../services/local-storage.service';
 import { TranlateConfigService } from '../services/tranlate-config.service';
 import { TranslateService } from '@ngx-translate/core';
+import { toLower } from 'ionicons/dist/types/components/icon/utils';
 
 @Component({
   selector: 'app-tab2',
@@ -54,9 +55,12 @@ export class Tab2Page {
 
   check: boolean;
   fail: boolean;
+  board: boolean;
   
   sound: any;
   audioTime: any;  
+
+  value: any;
 
   audio=new Audio();
 
@@ -143,8 +147,21 @@ export class Tab2Page {
         break;
     }
 
+    this.value = String(this.localStorageSrvc.getItem('board'));
+
     this.check = false;
     this.fail = false;
+    
+    switch(this.value){
+      case "true":
+      case "TRUE":
+      case "True":
+        this.board = true;
+        break;
+      default:
+        this.board = false;
+    }
+    
   }
 
   chooseLevel(id: number, lvl: string){

@@ -47,11 +47,12 @@
     <ion-card-header>{{ "SCRSETTINGS" | translate }}</ion-card-header>
     <ion-card-content>
       <ion-buttons>
-        <ion-button fill="solid" color="primary">
+        <ion-toggle [enableOnOffLabels]="true" [(ngModel)]="boardOn" (ionChange)="Board()">Vista en pizarra</ion-toggle>
+        <ion-button *ngIf="!boardOn" fill="solid" color="primary">
           <ion-icon name="text-outline" aria-hidden="true" slot="start"></ion-icon>
           {{ "TXTSETTINGS" | translate}}
         </ion-button>
-        <ion-button fill="solid" color="primary">
+        <ion-button *ngIf="!boardOn" fill="solid" color="primary">
           <ion-icon name="color-palette-outline" aria-hidden="true" slot="start"></ion-icon>
           {{ "COLORSETTINGS" | translate}}
         </ion-button>

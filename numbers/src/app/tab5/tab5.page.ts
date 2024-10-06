@@ -24,9 +24,11 @@ export class Tab5Page implements OnInit {
   guessLvl: any;
   sumLvl: any;
   prodLvl: any;
-  
+
   cancelModal: string;
   saveModal: string;
+
+  boardOn: boolean;
 
   titleMsg: string[];
   lvlMsg: string[];
@@ -105,7 +107,17 @@ export class Tab5Page implements OnInit {
         this.saveModal = this.modalMsg[2];
         this.cancelModal = this.modalMsg[3];
         break;
+    }
 
+    switch(String(this.localStorageSrvc.getItem('board'))){
+      case "TRUE":
+      case "true":
+      case "True":
+        this.boardOn = true;
+        break;
+      default:
+        this.boardOn = false;
+        break;
     }
   }
 
@@ -330,5 +342,10 @@ export class Tab5Page implements OnInit {
     });
 
     await toast.present();
+  }
+
+  Board(){
+    this.localStorageSrvc.setItem("board", String(this.boardOn));
+    console.log("VALORE DEL TOGGLE: ", this.boardOn);
   }
 }
