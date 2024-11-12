@@ -21,7 +21,7 @@ export class Tab3Page {
   firstNum: number;
   secondNum: number;
   
-  option: string;
+  //option: string;
   attempt: string;
   attemptCat: string;
   attemptsCat: string;
@@ -65,12 +65,12 @@ export class Tab3Page {
     private translateConfSrvc: TranlateConfigService,
   ) {
 
-    this.translateConfSrvc.getDefaultLanguage();
-    this.language = this.translateConfSrvc.getCurrentLang();
+    //this.translateConfSrvc.getDefaultLanguage();
+    this.language = "es";//this.translateConfSrvc.getCurrentLang();
 
-    this.option = String(this.retrieveFromLocalStorage('prodLvl'));
-    this.firstNum = this.chooseLevel(1, this.option);
-    this.secondNum = this.chooseLevel(2, this.option);
+    //this.option = String(this.retrieveFromLocalStorage('prodLvl'));
+    this.firstNum = this.chooseLevel(1, '1');//this.option);
+    this.secondNum = this.chooseLevel(2, '3');//this.option);
     
     this.num = 0;
     this.num1 = this.randomNum(0,this.firstNum);
@@ -257,8 +257,8 @@ export class Tab3Page {
 
   newGame(){
     this.num = 0;
-    this.firstNum = this.chooseLevel(1, this.option);
-    this.secondNum = this.chooseLevel(2, this.option);
+    this.firstNum = this.chooseLevel(1, '1');//this.option);
+    this.secondNum = this.chooseLevel(2, '3');//this.option);
     this.num1 = this.randomNum(0,this.firstNum);
     this.num2 = this.randomNum(0,this.secondNum);
 

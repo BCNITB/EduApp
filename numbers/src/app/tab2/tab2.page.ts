@@ -66,13 +66,13 @@ export class Tab2Page {
     private localStorageSrvc: LocalStorageService
   ) {
 
-    this.translateConfSrvc.getDefaultLanguage();
-    this.language = this.translateConfSrvc.getCurrentLang();
+    //this.translateConfSrvc.getDefaultLanguage();
+    this.language = "es";//this.translateConfSrvc.getCurrentLang();
 
     this.option = String(this.retrieveFromLocalStorage('sumLvl'));
     
-    this.firstNum = this.chooseLevel(1, this.option);
-    this.secondNum = this.chooseLevel(2, this.option);
+    this.firstNum = this.chooseLevel(1, 'avanzado');//this.option);
+    this.secondNum = this.chooseLevel(2, 'avanzado');//this.option);
 
     this.num = 0;
     this.num1 = this.randomNum(0,this.firstNum);
@@ -259,8 +259,8 @@ export class Tab2Page {
 
   newGame(){
     this.num = 0;
-    this.firstNum = this.chooseLevel(1, this.option);
-    this.secondNum = this.chooseLevel(2, this.option);
+    this.firstNum = this.chooseLevel(1, 'avanzado');//this.option);
+    this.secondNum = this.chooseLevel(2, 'avanzado');//this.option);
     this.num1 = this.randomNum(0,this.firstNum);
     this.num2 = this.randomNum(0,this.secondNum);
 

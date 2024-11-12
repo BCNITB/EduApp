@@ -81,6 +81,10 @@ img {
 margin-left: 40vw;
 }
 
+ion-toolbar a{
+    margin-right: 3rem;
+  }
+
 @media (min-width: 700px) {
 p, ion-item{
     margin: 0 30vw;

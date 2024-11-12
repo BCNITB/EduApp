@@ -19,7 +19,7 @@ export class Tab1Page {
   num1: number;
   count:number;
   
-  option: string;
+  //option: string;
   attemptsS: string;
   attemptsP: string;
   result:string;
@@ -56,11 +56,11 @@ export class Tab1Page {
     private translateConfSrvc: TranlateConfigService,
     private localStorageSrvc: LocalStorageService
   ) {
-    this.translateConfSrvc.getDefaultLanguage();
-    this.language = this.translateConfSrvc.getCurrentLang();
+    //this.translateConfSrvc.getDefaultLanguage();
+    this.language = "es"; //this.translateConfSrvc.getCurrentLang();
 
-    this.option = String(this.retrieveFromLocalStorage('guessLvl'));
-    this.maxNum = this.chooseLevel(this.option);
+    //this.option = String(this.retrieveFromLocalStorage('guessLvl'));
+    this.maxNum = 10//this.chooseLevel(this.option);
 
     this.num = 0;
     this.num1 = this.randomNum(0,this.maxNum);
