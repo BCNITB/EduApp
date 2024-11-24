@@ -342,10 +342,18 @@ export class Tab5Page implements OnInit {
     });
 
     await toast.present();
+
+    this.refreshView();
   }
 
   Board(){
     this.localStorageSrvc.setItem("board", String(this.boardOn));
     console.log("VALORE DEL TOGGLE: ", this.boardOn);
+    this.refreshView();
+  }
+
+  refreshView() {
+    // Refresh the present view
+    window.location.href = window.location.href;
   }
 }
