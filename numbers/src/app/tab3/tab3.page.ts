@@ -54,9 +54,11 @@ export class Tab3Page {
 
   check: boolean;
   fail: boolean;
+  board: boolean;
   
   sound: any;
   audioTime: any;  
+  value: any;
 
   audio=new Audio();
 
@@ -141,36 +143,48 @@ export class Tab3Page {
         break;
     }
 
+    this.value = String(this.localStorageSrvc.getItem('board'));
+
     this.check = false;
     this.fail = false;
+
+    switch(this.value){
+      case "true":
+      case "TRUE":
+      case "True":
+        this.board = true;
+        break;
+      default:
+        this.board = false;
+    }
   }
 
   chooseLevel(id: number, lvl: string){
     if(id == 1){
       switch(lvl){
-        case '1':
-        case '2':
+        case 'principiante':
+        case 'intermedio':
           return 10;
           break;
-        case '3':
+        case 'avanzado':
           return 100;
         default:
-          return 0;
+          return 10;
       }
     }
     else if(id == 2){
       switch(lvl){
-        case '1':
+        case 'principiante':
           return 10;
           break;
-        case '2':
-        case '3':
+        case 'intermedio':
+        case '3avanzado':
           return 100;
         default:
-          return 0;
+          return 10;
       }
     } else {
-      return 0;
+      return 10;
     }
   }
 

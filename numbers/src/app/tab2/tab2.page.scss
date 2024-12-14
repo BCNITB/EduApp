@@ -81,7 +81,7 @@ img {
     margin-left: 40vw;
 }
 
-.board-numbers{
+.board-numbers, #board-equal{
     font-size: 5em;
 }
 
@@ -98,11 +98,9 @@ img {
     align-items: center;
 }
 
-hr{
-    height: 2rem;
-    width: 50vw;
-    size: 5rem;
-    color: red;
+#board-equal{
+    border-top: 0.1em solid;
+    text-align: right;
 }
 
 /*#last-number, hr{
@@ -114,6 +112,11 @@ hr{
 
 /*.board-icons{
     font-size: 1em;
+}*/
+
+/*#board-equal{
+    unicode-bidi: bidi-override;
+  direction: rtl;
 }*/
 
 @media (min-width: 700px) {

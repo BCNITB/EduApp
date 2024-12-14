@@ -174,7 +174,7 @@ export class Tab2Page {
         case 'avanzado':
           return 100;
         default:
-          return 0;
+          return 10;
       }
     }
     else if(id == 2){
@@ -186,10 +186,10 @@ export class Tab2Page {
         case 'avanzado':
           return 100;
         default:
-          return 0;
+          return 10;
       }
     } else {
-      return 0;
+      return 10;
     }
   }
 

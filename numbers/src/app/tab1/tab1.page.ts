@@ -129,7 +129,7 @@ export class Tab1Page {
       case 'avanzado':
         return 100;
       default:
-        return 0;
+        return 10;
     }
   }
 

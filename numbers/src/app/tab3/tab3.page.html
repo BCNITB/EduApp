@@ -7,24 +7,48 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div class="ion-padding">
-    <h2 ng-init="numAleatorio()">Calcula el producto de los siguientes números</h2>
-    <p class="numbers">Primer número: {{ num1 }}</p>
-    <p class="numbers">Segundo número {{ num2 }}</p>
-    <p *ngIf="count > 0" class="numbers">N<span class="hidden">úmero</span> intentos: {{ count }}</p>
-    
-    <form *ngIf="!check && count < 5">
-      <ion-item>
-        <ion-label position="floating" for="checklabel">Valor del producto</ion-label>
-        <ion-input autofocus="true" clearInput type="number" min="1" max="200" name="checklabel" [(ngModel)] = "num"></ion-input>
-      </ion-item>
-      <ion-button (click)="checkAnswer()">Comprueba</ion-button>
-    </form>
+  <ion-card class="ion-padding" *ngIf="!board">
+    <ion-card-content>
+      <h2 ng-init="numAleatorio()">Calcula el producto de los siguientes números</h2>
+      <p class="numbers">Primer número: {{ num1 }}</p>
+      <p class="numbers">Segundo número {{ num2 }}</p>
+      <p *ngIf="count > 0" class="numbers">N<span class="hidden">úmero</span> intentos: {{ count }}</p>
+      
+      <form *ngIf="!check && count < 5">
+        <ion-item>
+          <ion-label position="floating" for="checklabel">Valor del producto</ion-label>
+          <ion-input autofocus="true" clearInput type="number" min="1" max="200" name="checklabel" [(ngModel)] = "num"></ion-input>
+        </ion-item>
+        <ion-button (click)="checkAnswer()">Comprueba</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
 
-    <div class="txt-center" *ngIf="check || count > 4">
-      <ion-button (click)="newGame()">Reiniciar</ion-button>
-    </div>
+  <ion-card class="ion-padding" *ngIf="board">
+    <ion-card-content>
+      <h2>{{ "SUMTITLE" | translate }}</h2>
+
+      <div class="board-numbers flex-container">
+        <span class="flex-item">{{ num1 }}</span> 
+        <span class="flex-item flex-cont" id="last-number">
+          <ion-icon class="board-icons" name="close-outline" aria-label="por"></ion-icon>   
+          <span>{{ num2 }}</span>
+        </span>
+      </div> 
+      
+      <form *ngIf="!check && count < 5">
+        <ion-item>
+          <ion-input autofocus="true" clearInput type="number" min="0" max="1000" name="checklabel" [(ngModel)] = "num" aria-label="igual" id="board-equal"></ion-input>
+        </ion-item>
+        <ion-button (click)="checkAnswer()">{{ "CHECKRESULT" | translate  }}</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+  
+  <div class="txt-center" *ngIf="check || count > 4">
+    <ion-button (click)="newGame()">Reiniciar</ion-button>
   </div>
+
   <ion-card>
     <ion-card-content>
       <ion-card-header *ngIf="count < 5">

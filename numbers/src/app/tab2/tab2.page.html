@@ -23,9 +23,9 @@
         <ion-button (click)="checkAnswer()">{{ "CHECKRESULT" | translate  }}</ion-button>
       </form>
 
-      <div class="txt-center" *ngIf="check || count > 4">
+      <!--<div class="txt-center" *ngIf="check || count > 4">
         <ion-button (click)="newGame()">{{ "RESTART" | translate }}</ion-button>
-      </div>
+      </div>-->
     </ion-card-content>
   </ion-card>
   
@@ -39,9 +39,20 @@
           <ion-icon class="board-icons" name="add-outline" aria-label="más"></ion-icon>   
           <span>{{ num2 }}</span>
         </span>
-      </div>
-      <hr>
+      </div> 
+      
+      <form *ngIf="!check && count < 5">
+        <ion-item>
+          <ion-input clearInput type="number" min="0" max="1000" name="checklabel" [(ngModel)] = "num" 
+          aria-label="igual" id="board-equal"></ion-input>
+        </ion-item>
+        <ion-button (click)="checkAnswer()">{{ "CHECKRESULT" | translate  }}</ion-button>
+      </form>
     </ion-card-content>
+  
+    <div class="txt-center" *ngIf="check || count > 4">
+      <ion-button (click)="newGame()">{{ "RESTART" | translate }}</ion-button>
+    </div>
   </ion-card>
 
   <ion-card>
